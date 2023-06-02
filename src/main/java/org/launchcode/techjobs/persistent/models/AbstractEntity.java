@@ -1,12 +1,18 @@
 package org.launchcode.techjobs.persistent.models;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
+@MappedSuperclass
 public abstract class AbstractEntity {
 
+    @Id
+    @GeneratedValue
     private int id;
 
+    @NotBlank(message="This cannot be left blank.")
+    @Size(message="No more than 150 characters.")
     private String name;
 
     public int getId() {
