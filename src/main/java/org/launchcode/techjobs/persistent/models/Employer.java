@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class Employer extends AbstractEntity {
 
-    @OneToMany (mappedBy = "JobRepository")
+    @OneToMany
     @JoinColumn (name = "employer_id")
     private List<Job> jobs = new ArrayList<>();
 
@@ -24,9 +24,9 @@ public class Employer extends AbstractEntity {
     public Employer() {}
 
 
-//    public List<Job> getJobs() {
-//        return jobs;
-//    }
+    public List<Job> getJobs() {
+        return jobs;
+    }
 
     public String getLocation() {
         return location;

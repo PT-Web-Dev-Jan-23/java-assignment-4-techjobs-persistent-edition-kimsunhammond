@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("Skill")
+@RequestMapping("skills")
 public class SkillController {
 
     @Autowired
@@ -33,8 +33,6 @@ public class SkillController {
         model.addAttribute(new Skill());
         return "skills/add";
     }
-
-
 
 
     @PostMapping("add")
