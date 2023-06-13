@@ -28,6 +28,7 @@ public class Employer extends AbstractEntity {
         return jobs;
     }
 
+
     public String getLocation() {
         return location;
     }

@@ -27,18 +27,15 @@ public class SkillController {
         return "skills/index";
     }
 
-
     @GetMapping("add")
     public String displayAddSkillForm(Model model) {
         model.addAttribute(new Skill());
         return "skills/add";
     }
 
-
     @PostMapping("add")
     public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill,
                                          Errors errors, Model model) {
-
         if (errors.hasErrors()) {
             return "skills/add";
         }
@@ -47,7 +44,6 @@ public class SkillController {
 
         return "redirect:";
     }
-
 
 
     @GetMapping("view/{skillId}")

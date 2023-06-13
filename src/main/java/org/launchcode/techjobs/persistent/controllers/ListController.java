@@ -8,11 +8,14 @@ import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.AttributedString;
 import java.util.HashMap;
+import java.util.Optional;
 
 /**
  * Created by LaunchCode
@@ -32,15 +35,11 @@ public class ListController {
 
     static HashMap<String, String> columnChoices = new HashMap<>();
 
-    public ListController () {
-
-
-
+    public ListController() {
 
         columnChoices.put("all", "All");
         columnChoices.put("employer", "Employer");
         columnChoices.put("skill", "Skill");
-
     }
 
     @RequestMapping("")
@@ -54,7 +53,8 @@ public class ListController {
     @RequestMapping(value = "jobs")
     public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
         Iterable<Job> jobs;
-        if (column.toLowerCase().equals("all")){
+
+        if (column.toLowerCase().equals("all")) {
             jobs = jobRepository.findAll();
             model.addAttribute("title", "All Jobs");
         } else {
@@ -65,5 +65,18 @@ public class ListController {
         model.addAttribute("jobs", jobs);
 
         return "list-jobs";
+    }
+
+    @GetMapping("view/{jobId}")
+    public String displayViewJob(Model model, @PathVariable int jobId) {
+
+        Optional optJob = jobRepository.findById(jobId);
+        if (!optJob.isEmpty()) {
+            Job job = (Job) optJob.get();
+            model.addAttribute("job", job);
+            return "view";
+        } else {
+            return "redirect:/";
+        }
     }
 }
